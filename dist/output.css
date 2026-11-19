@@ -804,16 +804,25 @@
     }
   }
   @media (width < 48rem) {
+    .max-md\:justify-between {
+      justify-content: space-between;
+    }
     .max-md\:justify-start {
       justify-content: flex-start;
     }
   }
   @media (width < 40rem) {
+    .max-sm\:justify-between {
+      justify-content: space-between;
+    }
     .max-sm\:justify-start {
       justify-content: flex-start;
     }
   }
   @media (width >= 40rem) {
+    .min-sm\:justify-between {
+      justify-content: space-between;
+    }
     .min-sm\:justify-start {
       justify-content: flex-start;
     }
@@ -836,6 +845,9 @@
     }
     .md\:justify-start {
       justify-content: flex-start;
+    }
+    .min-md\:justify-between {
+      justify-content: space-between;
     }
     .min-md\:justify-start {
       justify-content: flex-start;
