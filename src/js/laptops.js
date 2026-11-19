@@ -10,8 +10,7 @@ const res = await fetch("./data/laptops.json");
 const { laptops } = await res.json();
 
 const section = document.querySelector('#catalouge')
-section.innerHTML= laptops.map((l)=>{
-    return `
+const cardTemplate= (l)=> `
     <div class="laptop-card">
     <div class="flex flex-row justify-between "> <h3 class="font-bold">${l.name}</h3> 
     <button class="fav-btn" data-id="${l.id}">
@@ -26,9 +25,7 @@ section.innerHTML= laptops.map((l)=>{
         <a href="./details.html?id=${l.id}" class="btn-action">View Details</a>
     </div>
     `
-}).join("")
 
-const favBtn = document.querySelectorAll('.fav-btn')
 const getFavs = ()=> JSON.parse(localStorage.getItem("favourites")) || []
 const toggleFav = (id)=>{
     const favs= getFavs()
@@ -42,8 +39,9 @@ const setBtnState = (btn,isFav)=>{
     btn.classList.toggle('opacity-50',isFav)
     btn.classList.toggle('opacity-100',!isFav)
 }
-
-favBtn.forEach(
+const bindfavs= ()=>{
+    const favBtn = document.querySelectorAll('.fav-btn')
+    favBtn.forEach(
     btn => {
         const id=Number(btn.dataset.id)
         setBtnState(btn,getFavs().includes(id))
@@ -55,3 +53,50 @@ favBtn.forEach(
             showToast(isFav? `${name} added to favourites` : `${name} is removed from favourites`)
         })
     })
+}
+
+
+    //now we need a search bar that changes the seen laptops everytime we keydown
+    let searchTerm = ""
+    let category =""
+    let sortBy="price-asc"
+    const sorters={
+        "price-asc":  (a, b) => a.price - b.price,
+        "price-dsc": (a, b) => b.price - a.price,
+        "RAM-asc":  (a, b) => a.ramGB - b.ramGB,
+        "RAM-dsc": (a, b) => b.ramGB - a.ramGB,
+        "battery-asc":  (a, b) => a.batteryHours - b.batteryHours,
+        "battery-dsc": (a, b) => b.batteryHours - a.batteryHours,
+        "weight-asc":  (a, b) => a.weightKg - b.weightKg,
+        "weight-dsc": (a, b) => b.weightKg - a.weightKg,
+
+    }
+    const render = ()=>{
+        const filtered = laptops.filter(l =>{
+        const matchSearch = l.name.toLowerCase().includes(searchTerm) || l.brand.toLowerCase().includes(searchTerm)
+        const matchCategory = !category || l.category === category
+        return matchSearch && matchCategory
+        })
+        const sorted=[...filtered].sort(sorters[sortBy])
+        section.innerHTML=sorted.map(cardTemplate).join("")
+        bindfavs()
+    }
+
+
+    document.querySelector('#search').addEventListener('input',(e)=>{
+        searchTerm= e.target.value.toLowerCase()
+        render()
+    })
+    //we need a dropdown that arranges laptops (prices lowest to highest, rams lowest to highest, select brand, select category)
+
+    document.querySelector('#category').addEventListener('change', (e)=>{
+        category=e.target.value
+        render()
+    })
+
+    document.querySelector('#sort-filter').addEventListener('change',(e)=>{
+        sortBy=e.target.value
+        render();
+    })
+
+    render()
