@@ -1,7 +1,10 @@
 const themeButton = document.querySelector('#theme-toggle')
+const saved = localStorage.getItem('theme') || 'performance';
+document.documentElement.dataset.theme = saved;
+
 
 themeButton.addEventListener('click',()=>{
-    const curr = document.documentElement.dataset.theme
+    const curr=document.documentElement.dataset.theme
       const next = curr === 'performance' ? 'battery' : 'performance';
     document.documentElement.dataset.theme = next
     localStorage.setItem('theme',next)
@@ -9,5 +12,17 @@ themeButton.addEventListener('click',()=>{
 } )
 
 export function initBtn(){
-   themeButton.textContent= document.documentElement.dataset.theme === 'performance' ? "Performance Mode" : "Battery Saver Mode"
+   themeButton.textContent= saved === 'performance' ? "Performance Mode" : "Battery Saver Mode"
 }
+
+export const showToast = (msg) => {
+  const toast = document.getElementById("toast");
+  toast.textContent = msg;
+  toast.classList.remove("opacity-0");
+  toast.classList.add("opacity-100");
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(() => {
+    toast.classList.remove("opacity-100");
+    toast.classList.add("opacity-0");
+  }, 5000);
+};
