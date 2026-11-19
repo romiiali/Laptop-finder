@@ -1,0 +1,68 @@
+import "./theme.js";
+import { initBtn, showToast } from "./theme.js";
+
+
+initBtn();
+
+//we want to map over each laptop item and display in a card
+const res = await fetch("./data/laptops.json");
+const { laptops } = await res.json();
+
+const section = document.querySelector('#catalouge')
+const cardTemplate= (l)=> `
+    <div class="laptop-card w-1/2">
+    <div class="flex flex-row justify-between ">
+    <h3 class="font-bold">${l.name}</h3> 
+    <button class="fav-btn" data-id="${l.id}">
+    <img src="./assets/heart-button-performance.svg" alt="fav" class="h-6 w-6 block [html[data-theme='battery']_&]:hidden hover:scale-110  hover:cursor-pointer " ">
+    <img src="./assets/heart-button-battery.svg" alt="fav" class="h-6 w-6 hidden [html[data-theme='battery']_&]:block hover:scale-110  hover:cursor-pointer ">
+    </button>
+    </div>
+        <p class="text-muted">${l.brand}</p>
+        <p class="text-accent font-bold">$${l.price}</p>
+        <p>category: ${l.category}</p>
+        <p>Weight ${l.weightKg}</p>
+        <a href="./details.html?id=${l.id}" class="btn-action">View Details</a>
+    </div>
+    `
+
+const getFavs = ()=> JSON.parse(localStorage.getItem("favourites")) || []
+const favLaptops = laptops.filter(l=>getFavs().includes(l.id))
+section.innerHTML=favLaptops.map(cardTemplate).join("")
+
+const toggleFav = (id)=>{
+    const favs= getFavs()
+    const exists = favs.includes(id)
+    const next=exists ? favs.filter(f=>f!==id) : [...favs, Number(id)]
+    localStorage.setItem("favourites", JSON.stringify(next))
+    return !exists
+}
+const setBtnState = (btn,isFav)=>{
+    btn.classList.toggle('opacity-50',isFav)
+    btn.classList.toggle('opacity-100',!isFav)
+}
+
+const showEmptyIfNeeded = ()=>{
+    if(!section.querySelector('.laptop-card')){
+        section.innerHTML = `<p class="text-muted">No favourites yet</p>`
+    }
+}
+showEmptyIfNeeded()
+
+const favBtn = document.querySelectorAll('.fav-btn')
+favBtn.forEach(
+btn => {
+    const id=Number(btn.dataset.id)
+    setBtnState(btn,getFavs().includes(id))
+
+    btn.addEventListener('click', ()=>{
+        const isFav = toggleFav(id)
+        const name = laptops.find((l)=> l.id===id)?.name ?? "item";
+        setBtnState(btn,isFav)
+        if(!isFav){
+            btn.closest('.laptop-card').remove()
+            showEmptyIfNeeded()
+        }
+        showToast(isFav? `${name} added to favourites` : `${name} is removed from favourites`)
+    })
+})

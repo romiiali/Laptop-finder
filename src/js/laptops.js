@@ -31,6 +31,7 @@ const toggleFav = (id)=>{
     const favs= getFavs()
     const exists = favs.includes(id)
     const next=exists ? favs.filter(f=>f!==id) : [...favs, Number(id)]
+    console.log(next)
     localStorage.setItem("favourites", JSON.stringify(next))
     return !exists
 }
