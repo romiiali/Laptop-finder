@@ -88,6 +88,10 @@
   .stats-span{
     @apply flex flex-col text-3xl text-accent font-bold py-2
   }
+
+  .catalogue-grid {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4;
+}
 }
 
 /* Tailwind 4: tell the scanner where to look for class names */

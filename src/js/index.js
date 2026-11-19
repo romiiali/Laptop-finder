@@ -1,3 +1,8 @@
+
+import "./theme.js";
+import { initBtn } from "./theme.js";
+
+
 //we want  to generate the stats 
 const res = await fetch("./data/laptops.json")
 const {laptops} = await res.json()
@@ -26,5 +31,5 @@ Favs.innerHTML = `<p> You have
 <span class="stats-span">${favCount}</span>
  in <a href="./favourites.html">Favourites</a>
 </p>`
-themeButton.textContent= dataTheme === 'performance' ? "Performance Mode" : "Battery Saver Mode"
 
+initBtn();

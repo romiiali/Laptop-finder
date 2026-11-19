@@ -7,6 +7,34 @@
     <link rel="stylesheet" href="./dist/output.css">
 </head>
 <body>
-    
+    <nav class=" p-5 flex items-center">
+        <div class="flex-1">
+            <img src="/assets/computer-logo.svg" class="h-8 w-8" alt="logo">
+            <p class="text-accent font-bold ">LaptopFinder</p>
+        </div>
+        <div class="flex gap-5 ">
+        <a href="./index.html" class="btn-ghost">Home</a>
+        <a href="./laptops.html" class="btn-ghost">Laptops Cataloug</a>
+        <a href="./favourites.html" class="btn-ghost">Favourites</a>
+        <a href="./compare.html" class="btn-ghost">Compare</a>
+        </div>
+        <div class="flex flex-1 justify-end ">
+            <button id="theme-toggle" class="btn-action"></button>
+        </div>
+    </nav>
+
+    <section>
+        <div>
+            input form for search
+        </div>
+        <div>
+            filter options (price, rams, brand, category)
+        </div>
+    </section>
+
+    <section class="catalogue-grid "  id="catalouge"></section>
+
+    <script type="module" src="./src/js/laptops.js"></script>
+    <script type="module" src="./src/js/theme.js"></script>
 </body>
 </html>
