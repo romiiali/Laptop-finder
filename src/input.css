@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+/* Official plugin – visible effect on forms/typography */
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
+
+/* ---------- CUSTOM THEMES ---------- */
+/* Tailwind 4 @theme: these become real utilities like bg-surface, text-fg, etc. */
+@theme {
+  /* Shared */
+  --radius-card: 0.75rem;
+  --font-sans: "Inter", system-ui, sans-serif;
+
+  /* ---- Performance Mode (default / dark) ---- */
+  --color-bg:        #0f1115;   /* page background      */
+  --color-surface:   #1a1d24;   /* cards                */
+  --color-surface-2: #232732;   /* inputs / hover       */
+  --color-fg:        #f4f4f5;   /* main text            */
+  --color-muted:     #a1a1aa;   /* secondary text       */
+  --color-accent:    #f97316;   /* orange accent        */
+  --color-accent-fg: #1a1d24;   /* text on accent       */
+  --color-border:    #2f3440;
+}
+
+/* ---- Battery Saver Mode (light + green) ---- */
+/* We override the SAME variables on <html data-theme="battery"> */
+@layer base {
+  html[data-theme="battery"] {
+    --color-bg:        #f7faf7;
+    --color-surface:   #ffffff;
+    --color-surface-2: #eef6ee;
+    --color-fg:        #14211a;
+    --color-muted:     #4b5b52;
+    --color-accent:    #16a34a;   /* green */
+    --color-accent-fg: #ffffff;
+    --color-border:    #d5e6d8;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+/* ---------- REUSABLE COMPONENT CLASSES ---------- */
+@layer components {
+  .laptop-card {
+    @apply bg-surface border border-border rounded-[var(--radius-card)]
+           p-4 flex flex-col gap-3 shadow-sm
+           transition-all duration-200
+           hover:-translate-y-1 hover:shadow-lg
+           focus-within:ring-2 focus-within:ring-accent/60;
+  }
+
+  .btn-action {
+    @apply inline-flex items-center justify-center gap-2
+           px-4 py-2 rounded-lg font-medium
+           bg-accent text-accent-fg
+           transition-colors duration-200
+           hover:bg-surface-2 hover:text-fg hover:border-accent 
+           hover:border-2 
+           hover:scale-103 focus:outline-none
+           focus-visible:ring-2 focus-visible:ring-accent/60;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-3 py-2 rounded-lg
+           text-fg border border-border
+           transition-colors duration-900
+           hover:scale-103 hover:bg-accent ;
+  }
+
+  .filter-input {
+    @apply w-full rounded-lg border border-border bg-surface-2
+           text-fg placeholder:text-muted
+           focus:border-accent focus:ring-accent;
+  }
+
+  .skeleton {
+    @apply bg-surface-2 rounded-lg animate-pulse;
+  }
+
+  .stats-card{
+    @apply border border-2 border-accent p-3 text-xl text-gray-400 flex flex-col items-center text-center max-w-1/7 
+  }
+  .stats-span{
+    @apply flex flex-col text-3xl text-accent font-bold py-2
+  }
+}
+
+/* Tailwind 4: tell the scanner where to look for class names */
+@source "../*.html";
+@source "../src/js/**/*.js";
