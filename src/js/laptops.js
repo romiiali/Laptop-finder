@@ -1,45 +1,14 @@
 import "./theme.js";
 import { initBtn, showToast } from "./theme.js";
 import { fetchLaptops } from "./api.js";
-import { showSkeletons, showError } from "./ui.js";
+import { showSkeletons, showError, setBtnState, cardTemplate } from "./ui.js";
+import { getFavs, toggleFav } from "./storage.js";
 
 initBtn();
 
 const section = document.querySelector('#catalouge')
 let laptops = []
 
-const cardTemplate= (l)=> `
-    <div class="laptop-card">
-    <div class="flex flex-row justify-between "> <h3 class="font-bold">${l.name}</h3> 
-    <button class="fav-btn" data-id="${l.id}">
-    <img src="./assets/heart-button-performance.svg" alt="fav" class="h-6 w-6 block [html[data-theme='battery']_&]:hidden hover:scale-110  hover:cursor-pointer " ">
-    <img src="./assets/heart-button-battery.svg" alt="fav" class="h-6 w-6 hidden [html[data-theme='battery']_&]:block hover:scale-110  hover:cursor-pointer ">
-    </button>
-    </div>
-        <img src="${l.image}" alt="${l.name}" class="h-40 w-full object-cover rounded">
-        <p class="text-muted">${l.brand}</p>
-        <p class="text-accent font-bold">$${l.price}</p>
-        <p>category: ${l.category}</p>
-        <p>Weight ${l.weightKg}</p>
-        <p>${l.ramGB} RAMs </p>
-        <a href="./details.html?id=${l.id}" class="btn-action">View Details</a>
-    </div>
-    `
-
-const getFavs = ()=> JSON.parse(localStorage.getItem("favourites")) || []
-const toggleFav = (id)=>{
-    const favs= getFavs()
-    const exists = favs.includes(id)
-    const next=exists ? favs.filter(f=>f!==id) : [...favs, Number(id)]
-    console.log(next)
-    localStorage.setItem("favourites", JSON.stringify(next))
-    return !exists
-}
-
-const setBtnState = (btn,isFav)=>{
-    btn.classList.toggle('opacity-50',isFav)
-    btn.classList.toggle('opacity-100',!isFav)
-}
 const bindfavs= ()=>{
     const favBtn = document.querySelectorAll('.fav-btn')
     favBtn.forEach(
@@ -81,7 +50,7 @@ const bindfavs= ()=>{
         const sorted=[...filtered].sort(sorters[sortBy])
         const resSize = ()=> filtered.length == 0 ? 'No result found' : `${filtered.length} Results Found`
         document.querySelector('.result-count').innerHTML=`<p>${resSize()}</p>`
-        section.innerHTML=sorted.map(cardTemplate).join("")
+        section.innerHTML=sorted.map(l => cardTemplate(l)).join("")
         bindfavs()
     }
 

@@ -1,7 +1,8 @@
 import "./theme.js";
 import { initBtn,showToast } from "./theme.js";
 import { fetchLaptops } from "./api.js";
-import { showSkeletons, showError } from "./ui.js";
+import { showSkeletons, showError, setBtnState } from "./ui.js";
+import { getFavs, toggleFav, getCompare, toggleCompare } from "./storage.js";
 
 initBtn();
 
@@ -53,64 +54,27 @@ if(!laptop){
   `;
 }
 
-const favBtn = document.querySelectorAll('.fav-btn')
-const getFavs = ()=> JSON.parse(localStorage.getItem("favourites")) || []
-const toggleFav = (id)=>{
-    const favs= getFavs()
-    const exists = favs.includes(id)
-    const next=exists ? favs.filter(f=>f!==id) : [...favs, Number(id)]
-    localStorage.setItem("favourites", JSON.stringify(next))
-    return !exists
-}
+document.querySelectorAll('.fav-btn').forEach(btn => {
+    const id = Number(btn.dataset.id)
+    setBtnState(btn, getFavs().includes(id))
 
-const setBtnState = (btn,isFav)=>{
-    btn.classList.toggle('opacity-50',isFav)
-    btn.classList.toggle('opacity-100',!isFav)
-}
-
-favBtn.forEach(
-    btn => {
-        const id=Number(btn.dataset.id)
-        setBtnState(btn,getFavs().includes(id))
-
-        btn.addEventListener('click', ()=>{
-            const isFav = toggleFav(id)
-            const name = laptops.find((l)=> l.id===id)?.name ?? "item";
-            setBtnState(btn,isFav)
-            showToast(isFav? `${name} added to favourites` : `${name} is removed from favourites`)
-        })
+    btn.addEventListener('click', ()=>{
+        const isFav = toggleFav(id)
+        setBtnState(btn, isFav)
+        showToast(isFav ? `${laptop.name} added to favourites` : `${laptop.name} is removed from favourites`)
     })
+})
 
+document.querySelectorAll('.compare-btn').forEach(btn => {
+    const id = Number(btn.dataset.id)
+    setBtnState(btn, getCompare().includes(id))
 
-    const compareBtn = document.querySelectorAll('.compare-btn')
-    const getCompare = ()=> JSON.parse(localStorage.getItem("Compare")) || []
-    
-    const toggleCompare = (id)=>{
-    
-        const comps= getCompare()
-        const exists = comps.includes(id)
-        
-        if(!exists && comps.length >4){
-            return null
+    btn.addEventListener('click', ()=>{
+        const isCompare = toggleCompare(id)
+        if(isCompare === null){
+            return showToast(`Compare is full (max 4) - remove a laptop first`)
         }
-        const next=exists ? comps.filter(c=>c!==id) : [...comps, Number(id)]
-        localStorage.setItem("Compare", JSON.stringify(next))
-        return !exists
-        
-    }
-    compareBtn.forEach(
-    btn => {
-        const id=Number(btn.dataset.id)
-        setBtnState(btn,getCompare().includes(id))
-    
-        btn.addEventListener('click', ()=>{
-            const isCompare = toggleCompare(id)
-            const name = laptops.find((c)=> c.id===id)?.name ?? "item";
-            if(isCompare===null){
-                return showToast(`Compare is Full - Remove laptop to compare`)
-            }
-            setBtnState(btn,isCompare)
-            showToast(isCompare? `${name} added to Compare` : `${name} is removed from Compare`)
-        })
+        setBtnState(btn, isCompare)
+        showToast(isCompare ? `${laptop.name} added to Compare` : `${laptop.name} is removed from Compare`)
     })
-    
+})

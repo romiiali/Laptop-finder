@@ -1,7 +1,8 @@
 import "./theme.js";
 import { initBtn, showToast } from "./theme.js";
 import { fetchLaptops } from "./api.js";
-import { showSkeletons, showError } from "./ui.js";
+import { showSkeletons, showError, setBtnState } from "./ui.js";
+import { getFavs, getCompare, toggleFav, removeFromCompare } from "./storage.js";
 
 
 initBtn();
@@ -40,8 +41,6 @@ const cardTemplate= (l)=> `
         </div>
     `
 
-const getFavs = ()=> JSON.parse(localStorage.getItem("favourites")) || []
-const getCompare = ()=> JSON.parse(localStorage.getItem("Compare")) || []
 
 const compLaptops = laptops.filter(l=>getCompare().includes(l.id))
 section.innerHTML=compLaptops.map(cardTemplate).join("")
@@ -73,18 +72,6 @@ const highlightAll = ()=>{
 highlightAll()
 
 
-const toggleFav = (id)=>{
-    const favs= getFavs()
-    const exists = favs.includes(id)
-    const next=exists ? favs.filter(f=>f!==id) : [...favs, Number(id)]
-    localStorage.setItem("favourites", JSON.stringify(next))
-    return !exists
-}
-const setBtnState = (btn,isFav)=>{
-    btn.classList.toggle('opacity-50',isFav)
-    btn.classList.toggle('opacity-100',!isFav)
-}
-
 const showEmptyIfNeeded = ()=>{
     const count = section.querySelectorAll('.compare-card').length
 
@@ -111,7 +98,6 @@ btn => {
         const name = laptops.find((l)=> l.id===id)?.name ?? "item";
         setBtnState(btn,isFav)
         if(!isFav){
-            localStorage.setItem("Compare", JSON.stringify(getCompare().filter(c=>c!==id)))
             btn.closest('.compare-card').remove()
             highlightAll()
             showEmptyIfNeeded()
@@ -121,11 +107,6 @@ btn => {
 })
 
 const removeCompBtn = document.querySelectorAll('.remove-comp')
-const removefromCompare = (id)=>{
-
-    const next= getCompare().filter(c=>c!==id)
-    localStorage.setItem("Compare", JSON.stringify(next))    
-}
 removeCompBtn.forEach(
 btn => {
     const id=Number(btn.dataset.id)
@@ -133,7 +114,7 @@ btn => {
     btn.addEventListener('click', ()=>{
 
         const name = laptops.find((c)=> c.id===id)?.name ?? "item";
-        removefromCompare(id)
+        removeFromCompare(id)
         btn.closest('.compare-card').remove()
         highlightAll()
         showEmptyIfNeeded()
