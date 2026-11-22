@@ -26,11 +26,12 @@ if(!laptop){
 }else{
     section.innerHTML = `
     <div class="laptop-card">
-    <div class="flex flex-row justify-end">
-      <button class="fav-btn" data-id="${laptop.id}">
-    <img src="./assets/heart-button-performance.svg" alt="fav" class="h-6 w-6 block [html[data-theme='battery']_&]:hidden hover:scale-110  hover:cursor-pointer ">
-    <img src="./assets/heart-button-battery.svg" alt="fav" class="h-6 w-6 hidden [html[data-theme='battery']_&]:block hover:scale-110  hover:cursor-pointer ">
-    </button>
+    <div class="flex flex-row flex-wrap items-center justify-end gap-2">
+        <button class="fav-btn" data-id="${laptop.id}">
+        <img src="./assets/heart-button-performance.svg" alt="fav" class="h-6 w-6 block [html[data-theme='battery']_&]:hidden hover:scale-110  hover:cursor-pointer ">
+        <img src="./assets/heart-button-battery.svg" alt="fav" class="h-6 w-6 hidden [html[data-theme='battery']_&]:block hover:scale-110  hover:cursor-pointer ">
+        </button>
+        <button class="btn-action text-sm compare-btn"  data-id="${laptop.id}">Compare</button>
     </div>
       <img src="${laptop.image}" alt="${laptop.name}" class="h-64 w-full object-cover rounded">
       <h2 class="font-bold text-2xl">${laptop.name}</h2>
@@ -79,3 +80,37 @@ favBtn.forEach(
             showToast(isFav? `${name} added to favourites` : `${name} is removed from favourites`)
         })
     })
+
+
+    const compareBtn = document.querySelectorAll('.compare-btn')
+    const getCompare = ()=> JSON.parse(localStorage.getItem("Compare")) || []
+    
+    const toggleCompare = (id)=>{
+    
+        const comps= getCompare()
+        const exists = comps.includes(id)
+        
+        if(!exists && comps.length >4){
+            return null
+        }
+        const next=exists ? comps.filter(c=>c!==id) : [...comps, Number(id)]
+        localStorage.setItem("Compare", JSON.stringify(next))
+        return !exists
+        
+    }
+    compareBtn.forEach(
+    btn => {
+        const id=Number(btn.dataset.id)
+        setBtnState(btn,getCompare().includes(id))
+    
+        btn.addEventListener('click', ()=>{
+            const isCompare = toggleCompare(id)
+            const name = laptops.find((c)=> c.id===id)?.name ?? "item";
+            if(isCompare===null){
+                return showToast(`Compare is Full - Remove laptop to compare`)
+            }
+            setBtnState(btn,isCompare)
+            showToast(isCompare? `${name} added to Compare` : `${name} is removed from Compare`)
+        })
+    })
+    

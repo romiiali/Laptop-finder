@@ -26,3 +26,13 @@ export const showToast = (msg) => {
     toast.classList.add("opacity-0");
   }, 5000);
 };
+
+// Mobile menu: the nav links are hidden below md until the burger button is pressed
+const menuBtn = document.querySelector('#menu-toggle')
+const navLinks = document.querySelector('#nav-links')
+if (menuBtn && navLinks) {
+  menuBtn.addEventListener('click', () => {
+    const closed = navLinks.classList.toggle('max-md:hidden')
+    menuBtn.setAttribute('aria-expanded', String(!closed))
+  })
+}

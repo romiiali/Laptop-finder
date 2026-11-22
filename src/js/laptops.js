@@ -16,10 +16,12 @@ const cardTemplate= (l)=> `
     <img src="./assets/heart-button-battery.svg" alt="fav" class="h-6 w-6 hidden [html[data-theme='battery']_&]:block hover:scale-110  hover:cursor-pointer ">
     </button>
     </div>
+        <img src="${l.image}" alt="${l.name}" class="h-40 w-full object-cover rounded">
         <p class="text-muted">${l.brand}</p>
         <p class="text-accent font-bold">$${l.price}</p>
         <p>category: ${l.category}</p>
         <p>Weight ${l.weightKg}</p>
+        <p>${l.ramGB} RAMs </p>
         <a href="./details.html?id=${l.id}" class="btn-action">View Details</a>
     </div>
     `
@@ -64,8 +66,8 @@ const bindfavs= ()=>{
         "price-dsc": (a, b) => b.price - a.price,
         "RAM-asc":  (a, b) => a.ramGB - b.ramGB,
         "RAM-dsc": (a, b) => b.ramGB - a.ramGB,
-        "battery-asc":  (a, b) => a.batteryHours - b.batteryHours,
-        "battery-dsc": (a, b) => b.batteryHours - a.batteryHours,
+        // "battery-asc":  (a, b) => a.batteryHours - b.batteryHours,
+        // "battery-dsc": (a, b) => b.batteryHours - a.batteryHours,
         "weight-asc":  (a, b) => a.weightKg - b.weightKg,
         "weight-dsc": (a, b) => b.weightKg - a.weightKg,
 
@@ -77,6 +79,8 @@ const bindfavs= ()=>{
         return matchSearch && matchCategory
         })
         const sorted=[...filtered].sort(sorters[sortBy])
+        const resSize = ()=> filtered.length == 0 ? 'No result found' : `${filtered.length} Results Found`
+        document.querySelector('.result-count').innerHTML=`<p>${resSize()}</p>`
         section.innerHTML=sorted.map(cardTemplate).join("")
         bindfavs()
     }

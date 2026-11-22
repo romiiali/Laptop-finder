@@ -85,7 +85,7 @@
   }
 
   .stats-card{
-    @apply border border-2 border-accent p-3 text-xl text-gray-400 flex flex-col items-center text-center max-w-1/7 
+    @apply border border-2 border-accent p-3 text-xl text-gray-400 flex flex-col items-center text-center w-full sm:w-auto sm:min-w-48 
   }
   .stats-span{
     @apply flex flex-col text-3xl text-accent font-bold py-2
@@ -98,13 +98,16 @@
   @apply fixed bottom-6 right-6 bg-accent text-accent-fg px-4 py-2 rounded-lg shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 z-50
 }
 .compare{
-  @apply flex flex-row flex-wrap justify-center gap-5   
+  @apply flex flex-row flex-nowrap gap-5 p-4 w-max mx-auto   
 }
 .compare-card{
-  @apply flex flex-col flex-wrap gap-4 p-5 border border-accent border-4 rounded-lg items-center shadow-accent shadow-lg 
+  @apply flex flex-col flex-wrap gap-4 p-5 w-64 shrink-0 border border-accent border-4 rounded-lg items-center shadow-accent shadow-lg 
 }
 .best-value{
   @apply text-accent shadow-sm rounded-full p-2 shadow-highlight 
+}
+.result-count{
+  @apply text-accent font-semibold shadow-accent pt-3 pl-6  relative 
 }
 }
 

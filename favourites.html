@@ -3,29 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Favourites</title>
     <link rel="stylesheet" href="./dist/output.css">
 </head>
 <body>
-    <nav class=" p-5 flex items-center">
-        <div class="flex-1">
-            <img src="./assets/computer-logo.svg" class="" alt="logo">
-            <p class="text-accent font-bold ">LaptopFinder</p>
+    <nav class="p-5 flex flex-wrap items-center gap-3">
+        <div class="flex-1 flex items-center gap-2">
+            <img src="./assets/computer-logo.svg" class="h-8 w-8" alt="logo">
+            <p class="text-accent font-bold">LaptopFinder</p>
         </div>
-        <div class="flex gap-5 px-3">
-        <a href="./index.html" class="btn-ghost">Home</a>
-        <a href="./laptops.html" class="btn-ghost">Laptops Cataloug</a>
-        <a href="./favourites.html" class="btn-ghost">Favourites</a>
-        <a href="./compare.html" class="btn-ghost">Compare</a>
+        <!-- links: always visible from md up; on phones hidden until the menu button is pressed -->
+        <div id="nav-links" class="max-md:hidden order-last w-full flex flex-col gap-3 md:order-none md:w-auto md:flex-row md:gap-5 px-3">
+            <a href="./index.html" class="btn-ghost">Home</a>
+            <a href="./laptops.html" class="btn-ghost">Laptops Catalogue</a>
+            <a href="./favourites.html" class="btn-ghost">Favourites</a>
+            <a href="./compare.html" class="btn-ghost">Compare</a>
         </div>
-        <div class="flex flex-1 justify-end ">
-            <button id="theme-toggle" class="btn-action"></button>
+        <div class="flex items-center gap-2 md:flex-1 justify-end">
+            <button id="theme-toggle" class="btn-action text-sm sm:text-base"></button>
+            <button id="menu-toggle" class="btn-action md:hidden" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
         </div>
     </nav>
 
-    <section id="catalouge" class="flex flex-col items-center gap-4 p-4">
-        
-    </section>
+    <div class="clear-all flex justify-center md:justify-end px-4 pt-4"></div>
+    <section id="catalouge" class="flex flex-col items-center gap-4 p-4"></section>
 
     <div id="toast" class="toast"></div>
     

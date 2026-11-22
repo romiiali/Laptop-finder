@@ -18,22 +18,27 @@ try {
 }
 
 const cardTemplate= (l)=> `
-    <div class="laptop-card w-1/2">
-    <div class="flex flex-row justify-between ">
-    <h3 class="font-bold">${l.name}</h3> 
-    <div class="flex flex-row items-center gap-2 shrink-0">
-    <button class="fav-btn" data-id="${l.id}">
-    <img src="./assets/heart-button-performance.svg" alt="fav" class="h-6 w-6 block [html[data-theme='battery']_&]:hidden hover:scale-110  hover:cursor-pointer ">
-    <img src="./assets/heart-button-battery.svg" alt="fav" class="h-6 w-6 hidden [html[data-theme='battery']_&]:block hover:scale-110  hover:cursor-pointer ">
-    </button>
-    <button class="btn-action text-sm compare-btn"  data-id="${l.id}">Compare</button>
-    </div>
+    <div class="laptop-card w-full md:w-3/4 lg:w-1/2 flex flex-col-reverse sm:flex-row-reverse justify-between gap-4">
+    <div class="w-full ">
+    <div class="flex flex-row flex-wrap gap-2 justify-between ">
+        <h3 class="font-bold">${l.name}</h3> 
+        <div class="flex flex-row items-center gap-2 shrink-0">
+            <button class="fav-btn" data-id="${l.id}">
+            <img src="./assets/heart-button-performance.svg" alt="fav" class="h-6 w-6 block [html[data-theme='battery']_&]:hidden hover:scale-110  hover:cursor-pointer ">
+            <img src="./assets/heart-button-battery.svg" alt="fav" class="h-6 w-6 hidden [html[data-theme='battery']_&]:block hover:scale-110  hover:cursor-pointer ">
+            </button>
+            <button class="btn-action text-sm compare-btn"  data-id="${l.id}">Compare</button>
+        </div>
     </div>
         <p class="text-muted">${l.brand}</p>
         <p class="text-accent font-bold">$${l.price}</p>
         <p>category: ${l.category}</p>
         <p>Weight ${l.weightKg}</p>
         <a href="./details.html?id=${l.id}" class="btn-action">View Details</a>
+    </div>
+    <div>
+        <img src="${l.image}" alt="${l.name}" class="h-40 w-full sm:h-full sm:w-40 object-cover rounded">
+    </div>
     </div>
     `
 
@@ -95,9 +100,6 @@ const toggleCompare = (id)=>{
     return !exists
     
 }
-
-
-
 compareBtn.forEach(
 btn => {
     const id=Number(btn.dataset.id)
@@ -112,4 +114,13 @@ btn => {
         setBtnState(btn,isCompare)
         showToast(isCompare? `${name} added to Compare` : `${name} is removed from Compare`)
     })
+})
+const clearAllBtn = document.querySelector('.clear-all')
+
+clearAllBtn.innerHTML = `<button class="btn-action">Clear All</button>`
+clearAllBtn.addEventListener('click', ()=>{
+    localStorage.removeItem("favourites");
+    localStorage.removeItem("Compare");
+    section.innerHTML = `<p class="text-muted">No favourites yet</p>`
+    showToast("All favourites cleared");
 })

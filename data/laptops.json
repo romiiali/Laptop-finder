@@ -12,7 +12,7 @@
       "batteryHours": 18,
       "weightKg": 1.24,
       "screenInches": 13.6,
-      "image": "images/macbook-air-m3.jpg",
+      "image": "./assets/laptopplaceholder.jpg",
       "description": "Thin and light ultrabook with Apple's M3 chip, fanless design, and all-day battery life. Ideal for everyday productivity and creative work."
     },
     {
@@ -27,7 +27,7 @@
       "batteryHours": 12,
       "weightKg": 1.18,
       "screenInches": 13.4,
-      "image": "images/dell-xps-13.jpg",
+      "image": "./assets/laptopplaceholder.jpg",
       "description": "Premium compact ultrabook with an InfinityEdge display, aluminum chassis, and strong productivity performance in a highly portable package."
     },
     {
@@ -42,7 +42,7 @@
       "batteryHours": 14,
       "weightKg": 1.09,
       "screenInches": 14,
-      "image": "images/thinkpad-x1-carbon.jpg",
+      "image": "./assets/laptopplaceholder.jpg",
       "description": "Business-class ultrabook with a legendary keyboard, durable carbon-fiber build, and excellent battery life for professionals on the move."
     },
     {
@@ -57,7 +57,7 @@
       "batteryHours": 13,
       "weightKg": 1.28,
       "screenInches": 14,
-      "image": "images/zenbook-14-oled.jpg",
+      "image": "./assets/laptopplaceholder.jpg",
       "description": "Vibrant OLED ultrabook with a sleek metal body, generous storage, and strong multitasking performance at a competitive price."
     },
     {
@@ -72,7 +72,7 @@
       "batteryHours": 6,
       "weightKg": 2.01,
       "screenInches": 15.6,
-      "image": "images/razer-blade-15.jpg",
+      "image": "./assets/laptopplaceholder.jpg",
       "description": "Slim gaming laptop with an RTX 4060 GPU, CNC aluminum chassis, and a fast 240Hz display for competitive gaming."
     },
     {
@@ -87,7 +87,7 @@
       "batteryHours": 5,
       "weightKg": 2.5,
       "screenInches": 16,
-      "image": "images/rog-strix-g16.jpg",
+      "image": "./assets/laptopplaceholder.jpg",
       "description": "High-performance gaming laptop with an RTX 4070, RGB lighting, and a 165Hz display for demanding AAA titles."
     },
     {
@@ -102,7 +102,7 @@
       "batteryHours": 6,
       "weightKg": 2.55,
       "screenInches": 16,
-      "image": "images/legion-pro-5.jpg",
+      "image": "./assets/laptopplaceholder.jpg",
       "description": "Value-focused gaming laptop with an RTX 4060, excellent cooling, and a high-refresh-rate display for smooth gameplay."
     },
     {
@@ -117,7 +117,7 @@
       "batteryHours": 5,
       "weightKg": 2.6,
       "screenInches": 16,
-      "image": "images/predator-helios-16.jpg",
+      "image": "./assets/laptopplaceholder.jpg",
       "description": "Powerful gaming rig with an RTX 4080, large dual storage, and a bright 240Hz QHD panel for immersive gaming."
     },
     {
@@ -132,7 +132,7 @@
       "batteryHours": 13,
       "weightKg": 1.36,
       "screenInches": 14,
-      "image": "images/spectre-x360-14.jpg",
+      "image": "./assets/laptopplaceholder.jpg",
       "description": "Convertible 2-in-1 with a 360-degree hinge, OLED touchscreen, and premium build for flexibility between laptop and tablet modes."
     },
     {
@@ -147,7 +147,7 @@
       "batteryHours": 11,
       "weightKg": 1.4,
       "screenInches": 14,
-      "image": "images/yoga-9i.jpg",
+      "image": "./assets/laptopplaceholder.jpg",
       "description": "Premium 2-in-1 with a rotating soundbar hinge, OLED touch display, and included stylus for note-taking and creative work."
     },
     {
@@ -162,7 +162,7 @@
       "batteryHours": 10,
       "weightKg": 0.88,
       "screenInches": 13,
-      "image": "images/surface-pro-9.jpg",
+      "image": "./assets/laptopplaceholder.jpg",
       "description": "Detachable tablet-style 2-in-1 with a sharp PixelSense display and lightweight design, perfect for mobile productivity."
     },
     {
@@ -177,7 +177,7 @@
       "batteryHours": 10,
       "weightKg": 1.6,
       "screenInches": 14,
-      "image": "images/inspiron-14-2in1.jpg",
+      "image": "./assets/laptopplaceholder.jpg",
       "description": "Affordable convertible laptop with a touchscreen and flexible hinge, suitable for students and everyday tasks."
     },
     {
@@ -192,7 +192,7 @@
       "batteryHours": 22,
       "weightKg": 2.14,
       "screenInches": 16.2,
-      "image": "images/macbook-pro-16-m3.jpg",
+      "image": "./assets/laptopplaceholder.jpg",
       "description": "Creator-focused powerhouse with a stunning Liquid Retina XDR display, exceptional battery life, and strong video editing performance."
     },
     {
@@ -207,7 +207,7 @@
       "batteryHours": 10,
       "weightKg": 2.44,
       "screenInches": 17,
-      "image": "images/dell-xps-17.jpg",
+      "image": "./assets/laptopplaceholder.jpg",
       "description": "Large-screen creator laptop with discrete graphics, a near-borderless display, and ample RAM for photo and video workflows."
     },
     {
@@ -222,7 +222,7 @@
       "batteryHours": 8,
       "weightKg": 2.4,
       "screenInches": 16,
-      "image": "images/proart-studiobook-16.jpg",
+      "image": "./assets/laptopplaceholder.jpg",
       "description": "Color-accurate creator laptop with an OLED display, RTX 4070 graphics, and a physical ASUS Dial for precise creative control."
     },
     {
@@ -237,7 +237,7 @@
       "batteryHours": 12,
       "weightKg": 1.4,
       "screenInches": 14,
-      "image": "images/zbook-firefly-14.jpg",
+      "image": "./assets/laptopplaceholder.jpg",
       "description": "Mobile workstation for creators with ISV certification, a DreamColor display option, and durable business-grade construction."
     },
     {
@@ -252,7 +252,7 @@
       "batteryHours": 9,
       "weightKg": 1.7,
       "screenInches": 15.6,
-      "image": "images/acer-aspire-5.jpg",
+      "image": "./assets/laptopplaceholder.jpg",
       "description": "Affordable everyday laptop with solid performance for web browsing, office work, and light media consumption."
     },
     {
@@ -267,7 +267,7 @@
       "batteryHours": 8,
       "weightKg": 1.65,
       "screenInches": 15.6,
-      "image": "images/ideapad-3.jpg",
+      "image": "./assets/laptopplaceholder.jpg",
       "description": "Budget-friendly laptop with reliable Ryzen performance, a full-size keyboard, and a privacy shutter for everyday use."
     },
     {
@@ -282,7 +282,7 @@
       "batteryHours": 9,
       "weightKg": 1.75,
       "screenInches": 15.6,
-      "image": "images/hp-pavilion-15.jpg",
+      "image": "./assets/laptopplaceholder.jpg",
       "description": "Well-rounded budget laptop with a larger 512GB drive, a comfortable keyboard, and dependable battery life for students."
     },
     {
@@ -297,7 +297,7 @@
       "batteryHours": 10,
       "weightKg": 1.7,
       "screenInches": 15.6,
-      "image": "images/vivobook-15.jpg",
+      "image": "./assets/laptopplaceholder.jpg",
       "description": "Entry-level laptop with a slim design, fast-charging support, and enough power for schoolwork and streaming."
     }
   ]
