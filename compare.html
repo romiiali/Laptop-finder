@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html data-theme="performance" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./dist/output.css">
+</head>
+<body>
+    <nav class=" p-5 flex items-center">
+        <div class="flex-1">
+            <img src="./assets/computer-logo.svg" class="" alt="logo">
+            <p class="text-accent font-bold ">LaptopFinder</p>
+        </div>
+        <div class="flex gap-5 px-3">
+        <a href="./index.html" class="btn-ghost">Home</a>
+        <a href="./laptops.html" class="btn-ghost">Laptops Cataloug</a>
+        <a href="./favourites.html" class="btn-ghost">Favourites</a>
+        <a href="./compare.html" class="btn-ghost">Compare</a>
+        </div>
+        <div class="flex flex-1 justify-end ">
+            <button id="theme-toggle" class="btn-action"></button>
+        </div>
+    </nav>
+
+    <section id="catalouge" class="gap-4 p-4">
+        
+    </section>
+
+    <div id="toast" class="toast"></div>
+
+    <script type="module" src="./src/js/compare.js"></script>
+    <script type="module" src="./src/js/theme.js"></script>
+</body>
+</html>
