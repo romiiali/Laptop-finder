@@ -20,6 +20,7 @@
   --color-accent:    #f97316;   /* orange accent        */
   --color-accent-fg: #1a1d24;   /* text on accent       */
   --color-border:    #2f3440;
+  --color-highlight : #fef3c6 
 }
 
 /* ---- Battery Saver Mode (light + green) ---- */
@@ -33,7 +34,8 @@
     --color-muted:     #4b5b52;
     --color-accent:    #16a34a;   /* green */
     --color-accent-fg: #ffffff;
-    --color-border:    #d5e6d8;
+    --color-border:    #05df72;
+    --color-highlight : #05df72  
   }
 
   body {
@@ -69,7 +71,7 @@
     @apply inline-flex items-center gap-2 px-3 py-2 rounded-lg
            text-fg border border-border
            transition-colors duration-900
-           hover:scale-103 hover:bg-accent ;
+           hover:scale-103 hover:bg-accent hover:cursor-pointer ;
   }
 
   .filter-input {
@@ -94,6 +96,15 @@
 }
 .toast{
   @apply fixed bottom-6 right-6 bg-accent text-accent-fg px-4 py-2 rounded-lg shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 z-50
+}
+.compare{
+  @apply flex flex-row flex-wrap justify-center gap-5   
+}
+.compare-card{
+  @apply flex flex-col flex-wrap gap-4 p-5 border border-accent border-4 rounded-lg items-center shadow-accent shadow-lg 
+}
+.best-value{
+  @apply text-accent shadow-sm rounded-full p-2 shadow-highlight 
 }
 }
 

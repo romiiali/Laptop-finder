@@ -79,7 +79,7 @@ const toggleCompare = (id)=>{
     const comps= getCompare()
     const exists = comps.includes(id)
     
-    if(!exists && comps.length >= 4){
+    if(!exists && comps.length >4){
         return null
     }
     const next=exists ? comps.filter(c=>c!==id) : [...comps, Number(id)]
