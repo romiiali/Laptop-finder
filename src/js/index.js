@@ -1,8 +1,14 @@
 import "./theme.js";
 import { initBtn } from "./theme.js";
+import { fetchLaptops } from "./api.js";
 
-const res = await fetch("./data/laptops.json");
-const { laptops } = await res.json();
+let laptops = []
+try {
+    laptops = await fetchLaptops();
+} catch (err) {
+    document.querySelector('#laptops-count').textContent = err.message;
+    throw err;   // stop: nothing to show without data
+}
 
 const count = laptops.length;
 const cheapest = laptops.reduce((min, l) => (l.price < min.price ? l : min)).price;

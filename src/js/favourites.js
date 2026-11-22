@@ -1,14 +1,22 @@
 import "./theme.js";
 import { initBtn, showToast } from "./theme.js";
+import { fetchLaptops } from "./api.js";
+import { showSkeletons, showError } from "./ui.js";
 
 
 initBtn();
 
 //we want to map over each laptop item and display in a card
-const res = await fetch("./data/laptops.json");
-const { laptops } = await res.json();
-
 const section = document.querySelector('#catalouge')
+let laptops = []
+showSkeletons(section, 3)      
+try {
+    laptops = await fetchLaptops();
+} catch (err) {
+    showError(section, err.message);   
+    throw err;                      
+}
+
 const cardTemplate= (l)=> `
     <div class="laptop-card w-1/2">
     <div class="flex flex-row justify-between ">

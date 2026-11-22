@@ -1,15 +1,13 @@
 import "./theme.js";
 import { initBtn, showToast } from "./theme.js";
-
+import { fetchLaptops } from "./api.js";
+import { showSkeletons, showError } from "./ui.js";
 
 initBtn();
 
-
-//we want to map over each laptop item and display in a card
-const res = await fetch("./data/laptops.json");
-const { laptops } = await res.json();
-
 const section = document.querySelector('#catalouge')
+let laptops = []
+
 const cardTemplate= (l)=> `
     <div class="laptop-card">
     <div class="flex flex-row justify-between "> <h3 class="font-bold">${l.name}</h3> 
@@ -100,4 +98,10 @@ const bindfavs= ()=>{
         render();
     })
 
-    render()
+    showSkeletons(section)                  // 1. skeleton shows first
+    try {
+        laptops = await fetchLaptops()      // 2. wait for data
+        render()                            // 3. draw the cards
+    } catch (err) {
+        showError(section, err.message)     // 4. clear error message on failure
+    }

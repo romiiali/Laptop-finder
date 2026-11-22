@@ -1,17 +1,25 @@
 import "./theme.js";
 import { initBtn,showToast } from "./theme.js";
+import { fetchLaptops } from "./api.js";
+import { showSkeletons, showError } from "./ui.js";
 
 initBtn();
 
-const res = await fetch("./data/laptops.json");
-const { laptops } = await res.json();
+const section = document.querySelector('#catalouge')
+let laptops = []
+showSkeletons(section, 1)         
+try {
+    laptops = await fetchLaptops();
+} catch (err) {
+    showError(section, err.message); 
+    throw err;                         
+}
 
 const params = new URLSearchParams(window.location.search)
 const id = Number(params.get("id"))
 
 const laptop = laptops.find(l=>l.id===id)
 
-const section = document.querySelector('#catalouge')
 
 if(!laptop){
     section.innerHTML=`<p class="text-muted">laptop not found</p>`
